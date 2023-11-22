@@ -11,22 +11,33 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #f0e4d7; /* 可以根据需要调整背景色 */
+            background-color: #f0e4d7; /* 浪漫的背景颜色 */
             position: relative;
             font-family: 'Arial', sans-serif;
         }
 
         .love-message {
             position: absolute;
-            color: #ff69b4; /* 文本颜色 */
-            font-size: 2em; /* 文字大小 */
             white-space: nowrap;
             opacity: 0.8;
+            color: #ff69b4; /* 文本颜色 */
+            font-size: 2em; /* 初始文字大小 */
+        }
+
+        .icon {
+            font-size: 1.5em; /* 图标大小 */
+            margin: 0 0.2em; /* 图标间距 */
         }
 
         @keyframes slide {
             from { transform: translateX(100%); }
             to { transform: translateX(-100%); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -35,9 +46,17 @@
         function createMessage() {
             var message = document.createElement('div');
             message.classList.add('love-message');
-            message.textContent = '贾寒我爱你'; // 您的爱情信息
+            // 添加爱心图标和可爱的图标元素
+            message.innerHTML = '<span class="icon">💖</span>贾寒我爱你<span class="icon">🌹</span>';
             message.style.top = (Math.random() * window.innerHeight) + 'px'; // 随机位置
             message.style.animation = `slide ${Math.random() * 5 + 5}s linear infinite`; // 随机滑动速度
+            
+            // 图标的脉冲效果
+            var icons = message.querySelectorAll('.icon');
+            icons.forEach(function(icon) {
+                icon.style.animation = `pulse 1s ease infinite`;
+            });
+
             document.body.appendChild(message);
 
             // 动画完成后移除消息，避免DOM过多
