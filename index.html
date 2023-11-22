@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱的信息</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #f0e4d7; /* 可以根据需要调整背景色 */
+            position: relative;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .love-message {
+            position: absolute;
+            color: #ff69b4; /* 文本颜色 */
+            font-size: 2em; /* 文字大小 */
+            white-space: nowrap;
+            opacity: 0.8;
+        }
+
+        @keyframes slide {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function createMessage() {
+            var message = document.createElement('div');
+            message.classList.add('love-message');
+            message.textContent = '贾寒我爱你'; // 您的爱情信息
+            message.style.top = (Math.random() * window.innerHeight) + 'px'; // 随机位置
+            message.style.animation = `slide ${Math.random() * 5 + 5}s linear infinite`; // 随机滑动速度
+            document.body.appendChild(message);
+
+            // 动画完成后移除消息，避免DOM过多
+            message.addEventListener('animationend', function() {
+                message.parentElement.removeChild(message);
+            });
+        }
+
+        setInterval(createMessage, 500); // 每500毫秒添加一个消息
+    </script>
+</body>
+</html>
